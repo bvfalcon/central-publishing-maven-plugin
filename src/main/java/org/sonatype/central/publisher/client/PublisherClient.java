@@ -24,7 +24,7 @@ public interface PublisherClient
 
   DeploymentApiResponse status(final String deploymentId);
 
-  boolean isPublished(final String namespace, final String name, final String version);
+  boolean isPublished(final String namespace, final String name, final String version, final String classifier);
 
   /**
    * For auth providers whose principal is not a userId

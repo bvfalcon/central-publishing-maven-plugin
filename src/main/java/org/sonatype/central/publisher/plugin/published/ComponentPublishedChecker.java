@@ -7,5 +7,5 @@ package org.sonatype.central.publisher.plugin.published;
 
 public interface ComponentPublishedChecker
 {
-  boolean isComponentPublished(final String groupId, final String artifactId, final String version);
+  boolean isComponentPublished(final String groupId, final String artifactId, final String version, final String classifier);
 }

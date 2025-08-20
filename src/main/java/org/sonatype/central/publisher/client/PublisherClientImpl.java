@@ -21,6 +21,7 @@ import org.sonatype.central.publisher.client.model.PublishingType;
 import static org.sonatype.central.publisher.client.PublisherConstants.COMPONENT_NAMESPACE_QUERY_PARAM;
 import static org.sonatype.central.publisher.client.PublisherConstants.COMPONENT_NAME_QUERY_PARAM;
 import static org.sonatype.central.publisher.client.PublisherConstants.COMPONENT_VERSION_QUERY_PARAM;
+import static org.sonatype.central.publisher.client.PublisherConstants.COMPONENT_CLASSIFIER_QUERY_PARAM;
 import static org.sonatype.central.publisher.client.PublisherConstants.DEFAULT_CENTRAL_BASEURL;
 import static org.sonatype.central.publisher.client.PublisherConstants.DEPLOYMENT_ID_QUERY_PARAM;
 import static org.sonatype.central.publisher.client.PublisherConstants.DEPLOYMENT_NAME_QUERY_PARAM;
@@ -85,11 +86,14 @@ class PublisherClientImpl
   }
 
   @Override
-  public boolean isPublished(final String namespace, final String name, final String version) {
+  public boolean isPublished(final String namespace, final String name, final String version, final String classifier) {
     Map<String, String> queryParams = authProvider().getQueryParams();
     queryParams.put(COMPONENT_NAMESPACE_QUERY_PARAM, namespace);
     queryParams.put(COMPONENT_NAME_QUERY_PARAM, name);
     queryParams.put(COMPONENT_VERSION_QUERY_PARAM, version);
+    if (classifier != null) {
+        queryParams.put(COMPONENT_CLASSIFIER_QUERY_PARAM, classifier);
+    }
     return componentPublishedEndpoint.call(centralBaseUrl(), authProvider(), queryParams);
   }
 

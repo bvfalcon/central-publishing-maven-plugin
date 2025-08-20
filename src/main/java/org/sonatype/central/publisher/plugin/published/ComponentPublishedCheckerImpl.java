@@ -8,6 +8,8 @@ package org.sonatype.central.publisher.plugin.published;
 import org.sonatype.central.publisher.client.PublisherClient;
 import org.sonatype.central.publisher.client.PublisherClientFactory;
 
+import java.util.Optional;
+
 import org.codehaus.plexus.component.annotations.Component;
 import org.codehaus.plexus.component.annotations.Requirement;
 import org.codehaus.plexus.logging.AbstractLogEnabled;
@@ -32,14 +34,14 @@ public class ComponentPublishedCheckerImpl
   }
 
   @Override
-  public boolean isComponentPublished(final String groupId, final String artifactId, final String version) {
+  public boolean isComponentPublished(final String groupId, final String artifactId, final String version, final String classifier) {
     getLogger().info(
         "Check component published status for component: groupId:" + groupId + " artifactId:" + artifactId +
-            " version:" + version);
-    boolean published = publisherClient.isPublished(groupId, artifactId, version);
+            " version:" + version + Optional.ofNullable(classifier).map(clsfr -> " classifier: " + clsfr).orElse(""));
+    boolean published = publisherClient.isPublished(groupId, artifactId, version, classifier);
     if (published) {
       getLogger().info("Excluding component: groupId:" + groupId + " artifactId:" + artifactId + " version:" + version +
-          " as a published");
+          Optional.ofNullable(classifier).map(clsfr -> " classifier: " + clsfr).orElse("") + " as a published");
     }
     return published;
   }

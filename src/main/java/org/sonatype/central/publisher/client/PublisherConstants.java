@@ -36,4 +36,6 @@ public class PublisherConstants
   public static final String COMPONENT_NAME_QUERY_PARAM = "name";
 
   public static final String COMPONENT_VERSION_QUERY_PARAM = "version";
+
+  public static final String COMPONENT_CLASSIFIER_QUERY_PARAM = "classifier";
 }

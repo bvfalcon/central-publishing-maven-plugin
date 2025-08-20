@@ -400,7 +400,8 @@ public class PublishMojo
 
           if (ignorePublishedComponents) {
             return !componentPublishedChecker.isComponentPublished(artifactWithFile.getArtifact().getGroupId(),
-                artifactWithFile.getArtifact().getArtifactId(), artifactWithFile.getArtifact().getVersion());
+                artifactWithFile.getArtifact().getArtifactId(), artifactWithFile.getArtifact().getVersion(),
+                artifactWithFile.getArtifact().getClassifier());
           }
 
           return true;
